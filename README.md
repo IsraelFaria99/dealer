@@ -1,4 +1,4 @@
-# dealer
+# Dealer
 
 Flutter package to handle callbacks in widgets after a return from any service request.
 
