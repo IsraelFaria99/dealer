@@ -1,2 +1,2 @@
-enum RequestHandlerStatus { Initial, Loading, Completed, Error }
-enum ReturnStatus { Success, Error, ServerError, NetworkError }
+enum RequestHandlerWidgetStatus { Initial, Loading, Completed, Error }
+enum RequestHandlerWorkflowStatus { Success, Error, ServerError, NetworkError }

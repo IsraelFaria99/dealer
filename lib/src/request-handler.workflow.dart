@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class RequestHandlerWorkflow {
   static void handle({
-    @required ReturnStatus status,
+    @required RequestHandlerWorkflowStatus status,
     @required Function successCallBack,
     Function errorCallBack,
     Function serverErrorCallBack,
@@ -14,10 +14,10 @@ class RequestHandlerWorkflow {
     bool usingAsuka = true,
   }) {
     switch (status) {
-      case ReturnStatus.Success:
+      case RequestHandlerWorkflowStatus.Success:
         successCallBack();
         break;
-      case ReturnStatus.Error:
+      case RequestHandlerWorkflowStatus.Error:
         if (errorCallBack != null)
           errorCallBack();
         else {
@@ -33,7 +33,7 @@ class RequestHandlerWorkflow {
           }
         }
         break;
-      case ReturnStatus.ServerError:
+      case RequestHandlerWorkflowStatus.ServerError:
         if (serverErrorCallBack != null)
           serverErrorCallBack();
         else {
@@ -45,7 +45,7 @@ class RequestHandlerWorkflow {
           }
         }
         break;
-      case ReturnStatus.NetworkError:
+      case RequestHandlerWorkflowStatus.NetworkError:
         if (networkErrorCallBack != null)
           networkErrorCallBack();
         else {

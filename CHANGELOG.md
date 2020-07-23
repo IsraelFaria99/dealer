@@ -1,7 +1,6 @@
-## [1.0.0] - TODO: Initial release.
+## 1.0.1 - Update classes objects
 
-* TODO: Describe initial release.
+* RequestHandlerStatus now is an object with methods to change it status.
+* Some classes were renamed to be more readable
 
-## [0.0.1] - TODO: Add release date.
-
-* TODO: Describe initial release.
+## 1.0.0  - Initial release

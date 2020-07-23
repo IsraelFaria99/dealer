@@ -2,11 +2,13 @@ import 'package:dealer/src/request-handler.enum.dart';
 import 'package:flutter/material.dart';
 
 class RequestHandlerWidget extends StatelessWidget {
-  final RequestHandlerStatus status;
+  final RequestHandlerWidgetStatus status;
   final Widget Function() initialWidget;
   final Widget Function() successWidget;
   final Widget Function() errorWidget;
   final Widget Function() loadingWidget;
+  final bool successAndInitialWidgetAreTheSame;
+  final Text errorMessage;
 
   RequestHandlerWidget({
     @required this.status,
@@ -14,15 +16,17 @@ class RequestHandlerWidget extends StatelessWidget {
     this.initialWidget,
     this.errorWidget,
     this.loadingWidget,
+    this.successAndInitialWidgetAreTheSame = true,
+    this.errorMessage,
   });
 
   @override
   Widget build(BuildContext context) {
     switch (status) {
-      case RequestHandlerStatus.Completed:
+      case RequestHandlerWidgetStatus.Completed:
         return successWidget();
         break;
-      case RequestHandlerStatus.Loading:
+      case RequestHandlerWidgetStatus.Loading:
         return loadingWidget != null
             ? loadingWidget()
             : Container(
@@ -31,17 +35,17 @@ class RequestHandlerWidget extends StatelessWidget {
                 ),
               );
         break;
-      case RequestHandlerStatus.Error:
+      case RequestHandlerWidgetStatus.Error:
         return errorWidget != null
             ? errorWidget()
             : Container(
-                child: Center(
-                  child: Text('Error :/'),
-                ),
+                child: errorMessage != null ? errorMessage : Text('Error'),
               );
         break;
       default:
-        return initialWidget != null ? initialWidget() : Container();
+        return successAndInitialWidgetAreTheSame
+            ? initialWidget != null ? initialWidget() : successWidget()
+            : initialWidget != null ? initialWidget() : Container();
     }
   }
 }

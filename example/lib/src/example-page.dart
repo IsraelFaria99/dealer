@@ -7,7 +7,7 @@ class ExamplePage extends StatefulWidget {
 }
 
 class _ExamplePageState extends State<ExamplePage> {
-  RequestHandlerStatus status = RequestHandlerStatus.Initial;
+  RequestHandlerWidgetModel requestHandlerStatusModel = RequestHandlerWidgetModel();
   String name;
   @override
   Widget build(BuildContext context) {
@@ -15,11 +15,11 @@ class _ExamplePageState extends State<ExamplePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           setState(() {
-            status = RequestHandlerStatus.Loading;
+            requestHandlerStatusModel.setLoading();
           });
           name = await ExamplePageController.getName();
           setState(() {
-            status = RequestHandlerStatus.Completed;
+            requestHandlerStatusModel.setCompleted();
           });
         },
         child: Icon(Icons.search),
@@ -27,8 +27,8 @@ class _ExamplePageState extends State<ExamplePage> {
       body: Container(
         child: Center(
           child: RequestHandlerWidget(
-              status: status,
-              initialWidget: ()=> Text('Uhmmmm...'),
+              status: requestHandlerStatusModel.status,
+              initialWidget: () => Text('Uhmmmm...'),
               successWidget: () {
                 return Container(
                   child: Text('Well done $name'),
